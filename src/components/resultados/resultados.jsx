@@ -1,38 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import "./listado.css";
+import "../listado/listado.css";
 
-const Listado = ({ addOrRemoveFavories }) => {
-  const token = sessionStorage.getItem("token");
-  const navigate = useNavigate();
-  const [moviesList, setMoviesList] = useState([]);
+const Resultados = ({ addOrRemoveFavories }) => {
+  let { keyword } = useParams();
+  const [movieResults, setMovieResults] = useState([]);
+  const uri = `https://api.themoviedb.org/3/search/movie?api_key=6f226fce4c6f51cb125546af1fbd646d&language=en-US&page=1&include_adult=false&query=${keyword}`;
 
   useEffect(() => {
-    const endPoint =
-      "https://api.themoviedb.org/3/discover/movie?api_key=6f226fce4c6f51cb125546af1fbd646d&language=en-US&page=1";
     axios
-      .get(endPoint)
+      .get(uri)
       .then((res) => {
-        const apiData = res.data;
-        setMoviesList(apiData.results);
+        if (res.data.results.length === 0) {
+          Swal.fire(
+            "Error",
+            "No se encontraron resultados de tu búsqueda",
+            "warning"
+          );
+        }
+        setMovieResults(res.data.results);
       })
       .catch((err) =>
-        Swal.fire("Error", "No hay datos para mostrar ", "warning")
+        Swal.fire("Error", "No se pudo ubicar la información", "warning")
       );
-  }, [setMoviesList]);
+  }, [uri]);
 
   return (
-    <div>
-      {!token && navigate("/")}
+    <>
+      {movieResults.length === 0 && <h3>No hay resultados</h3>}
       <div className="container">
         <div className="row">
           {React.Children.toArray(
-            moviesList.map((elem) => {
+            movieResults.map((elem) => {
               return (
                 <div className="col-12 col-md-3">
-                  <div className="card m-2 position-relative">
+                  <div className="card m-2">
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${elem.poster_path}`}
                       className="card-img-top"
@@ -64,7 +68,7 @@ const Listado = ({ addOrRemoveFavories }) => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
-export default Listado;
+export default Resultados;

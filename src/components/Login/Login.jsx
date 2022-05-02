@@ -48,6 +48,7 @@ const Login = () => {
 
   return (
     <div>
+      {token && navigate("/listado")}
       <h2 className="text-center">Login</h2>
       <form
         className="col-12 col-md-6 p-2 ms-auto me-auto"

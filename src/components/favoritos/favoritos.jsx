@@ -1,42 +1,25 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import "./listado.css";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Listado = ({ addOrRemoveFavories }) => {
-  const token = sessionStorage.getItem("token");
-  const navigate = useNavigate();
-  const [moviesList, setMoviesList] = useState([]);
-
-  useEffect(() => {
-    const endPoint =
-      "https://api.themoviedb.org/3/discover/movie?api_key=6f226fce4c6f51cb125546af1fbd646d&language=en-US&page=1";
-    axios
-      .get(endPoint)
-      .then((res) => {
-        const apiData = res.data;
-        setMoviesList(apiData.results);
-      })
-      .catch((err) =>
-        Swal.fire("Error", "No hay datos para mostrar ", "warning")
-      );
-  }, [setMoviesList]);
-
+const Favoritos = ({ addOrRemoveFavories, favorites }) => {
   return (
-    <div>
-      {!token && navigate("/")}
+    <>
+      {favorites.length === 0 && (
+        <p className="position-absolute top-50 start-50 translate-middle">
+          No tienes favoritos en tu lista
+        </p>
+      )}
       <div className="container">
         <div className="row">
           {React.Children.toArray(
-            moviesList.map((elem) => {
+            favorites.map((elem) => {
               return (
                 <div className="col-12 col-md-3">
                   <div className="card m-2 position-relative">
                     <img
-                      src={`https://image.tmdb.org/t/p/w500/${elem.poster_path}`}
+                      src={elem.imageUrl}
                       className="card-img-top"
-                      alt={elem.original_title}
+                      alt={elem.title}
                     />
                     <button
                       className="btn-like"
@@ -64,7 +47,8 @@ const Listado = ({ addOrRemoveFavories }) => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
-export default Listado;
+
+export default Favoritos;

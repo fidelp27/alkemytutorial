@@ -1,17 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Buscador = () => {
+  const navigate = useNavigate();
+
   const submitHandle = (e) => {
     e.preventDefault();
     const keyword = e.target.keyword.value.trim();
     if (!keyword) {
       Swal.fire("Error", "Este campo no puede estar vacío ", "warning");
       return;
-    }
-    if (keyword.length <= 2) {
+    } else if (keyword.length <= 2) {
       Swal.fire("Error", "Debes ingresar al menos 3 caracteres", "warning");
       return;
+    } else {
+      e.target.keyword.value = "";
+      navigate(`/resultados/${keyword}`);
     }
   };
   return (

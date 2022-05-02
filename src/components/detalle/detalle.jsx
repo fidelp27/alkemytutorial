@@ -19,7 +19,6 @@ const Detalle = () => {
       );
   }, [id, navigate]);
 
-  console.log(movie);
   return (
     <>
       {!movie && <p>...Cargando</p>}

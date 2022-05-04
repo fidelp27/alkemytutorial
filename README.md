@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Práctica de React en donde se tocaron los siguientes puntos: 
+<ul>
+  <li>Login</li> 
+  <li>Persistencia de login </li>
+  <li>Validación de formularios </li>
+  <li>Protección de rutas </li>
+  <li>Consumo de API </li>
+  <li>Manejo de errores </li>
+  <li>Favoritos en localStorage </li>
+  <li>Barra de búsqueda </li>
+  <li>Bootstrap</li>
+</ul>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+https://user-images.githubusercontent.com/72738638/166684594-fd9ecfcc-2b59-4927-9f6a-f2bd8e398452.mp4
+
+
 
 ## Available Scripts
 

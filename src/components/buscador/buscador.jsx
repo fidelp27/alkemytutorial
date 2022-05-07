@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const Buscador = () => {
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
 
   const submitHandle = (e) => {
     e.preventDefault();
@@ -20,23 +21,27 @@ const Buscador = () => {
     }
   };
   return (
-    <form
-      className="col-12 col-md-4 d-flex align-items-center "
-      onSubmit={submitHandle}
-    >
-      <div className="me-2 ">
-        <input
-          type="text"
-          className="form-control"
-          name="keyword"
-          placeholder="Ingresa tu película"
-        />
-      </div>
+    <>
+      {token && (
+        <form
+          className="col-12 col-md-4 d-flex align-items-center "
+          onSubmit={submitHandle}
+        >
+          <div className="me-2 ">
+            <input
+              type="text"
+              className="form-control"
+              name="keyword"
+              placeholder="Ingresa tu película"
+            />
+          </div>
 
-      <button type="submit" className="btn btn-primary">
-        Buscar
-      </button>
-    </form>
+          <button type="submit" className="btn btn-primary">
+            Buscar
+          </button>
+        </form>
+      )}
+    </>
   );
 };
 export default Buscador;

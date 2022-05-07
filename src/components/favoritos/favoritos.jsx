@@ -1,7 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Favoritos = ({ addOrRemoveFavories, favorites }) => {
+  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !token &&
+      Swal.fire(
+        "Error",
+        "Debes ingresar tu cuenta para acceder a este sitio",
+        "warning"
+      ) &&
+      navigate("/");
+  }, []);
+
   return (
     <>
       {favorites.length === 0 && (

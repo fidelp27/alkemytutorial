@@ -17,7 +17,7 @@ const Footer = () => {
             </a>
           </nav>
           <div className="col-12 text-white fs-6 text-center p-0">
-            Copyrigth Fidel Parabacuto
+            Copyright Fidel Parabacuto
           </div>
         </div>
       </footer>

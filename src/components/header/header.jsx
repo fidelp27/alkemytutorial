@@ -13,14 +13,12 @@ const Header = ({ favorites }) => {
           <Link to="/listado" className="nav-link">
             Listas
           </Link>
-          <Link to="/contacto" className="nav-link">
-            Contacto
-          </Link>
+
           <Link to="/favoritos" className="nav-link">
             Favoritos
             {favorites.length > 0 && (
               <sup className="bg-warning text-white ms-1 border-0 ps-1 pe-1 fs-6 rounded-circle">
-                {favorites.length}{" "}
+                {favorites.length}
               </sup>
             )}
           </Link>

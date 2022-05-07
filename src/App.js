@@ -47,14 +47,10 @@ function App() {
       tempMoviesInFav.push(movieData)
       localStorage.setItem("fav", JSON.stringify(tempMoviesInFav))
       setFavorites(tempMoviesInFav)
-      console.log("película agregada");
     } else {
       let moviesLeft = tempMoviesInFav.filter((elem) => elem.id !== movieData.id)
       localStorage.setItem("fav", JSON.stringify(moviesLeft))
       setFavorites(moviesLeft)
-
-      console.log("película eliminada");
-
     }
 
   }

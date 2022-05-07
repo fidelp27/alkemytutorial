@@ -23,9 +23,18 @@ const Listado = ({ addOrRemoveFavories }) => {
       );
   }, [setMoviesList]);
 
+  useEffect(() => {
+    !token &&
+      Swal.fire(
+        "Error",
+        "Debes ingresar tu cuenta para acceder a este sitio",
+        "warning"
+      ) &&
+      navigate("/");
+  }, []);
+
   return (
     <div>
-      {!token && navigate("/")}
       <div className="container">
         <div className="row">
           {React.Children.toArray(
@@ -34,7 +43,11 @@ const Listado = ({ addOrRemoveFavories }) => {
                 <div className="col-12 col-md-3">
                   <div className="card m-2 position-relative">
                     <img
-                      src={`https://image.tmdb.org/t/p/w500/${elem.poster_path}`}
+                      src={
+                        !elem.poster_path
+                          ? "https://i.imgur.com/IISoPIG.jpg"
+                          : `https://image.tmdb.org/t/p/w500/${elem.poster_path}`
+                      }
                       className="card-img-top"
                       alt={elem.original_title}
                     />
